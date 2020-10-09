@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import countryList from "react-select-country-list";
 import styles from "./Form.module.scss";
 
-export const Form = () => {
+export function Form() {
   const [countryA, setCountryA] = useState("default");
   const [countryB, setCountryB] = useState("default");
   const [startDate, setStartDate] = useState("");
