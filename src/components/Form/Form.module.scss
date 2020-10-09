@@ -1,0 +1,68 @@
+.Form {
+  height: 300px;
+  width: 275px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .Countries {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    .CountryContainer {
+      height: 100%;
+      display: flex;
+      padding-bottom: 13px;
+      flex-direction: column;
+
+      .Label {
+        padding-bottom: 5px;
+      }
+
+      .Country {
+        height: 35px;
+        width: 100%;
+        background-image: url("./arrow.png");
+        background-position: calc(100% - 10px);
+        background-repeat: no-repeat;
+        background-size: 10px;
+        color: #767676;
+        padding: 0px 10px;
+        outline: none;
+
+        // to hide default arrow
+        --webkit-appearance: none;
+        --moz-appearance: none;
+        appearance: none;
+      }
+    }
+  }
+
+  .Dates {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .DateContainer {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 20px;
+
+      .Label {
+        padding-bottom: 5px;
+      }
+
+      .Date {
+        height: 35px;
+        width: 100px;
+        padding: 0px 10px;
+      }
+    }
+  }
+
+  .Submit {
+    height: 35px;
+    width: 100%;
+  }
+}
