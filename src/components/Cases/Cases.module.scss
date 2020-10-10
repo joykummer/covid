@@ -2,16 +2,24 @@
   height: 100vh;
   width: 100vw;
   font-family: Cabin, sans-serif;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 
-  h2 {
-    margin: 0px;
-  }
+  .CasesContainer {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-  h4 {
-    color: #ff9700;
+    h2 {
+      margin: 0px;
+    }
+
+    h4 {
+      color: #ff9700;
+    }
   }
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import moment from "moment";
 import { connect } from "react-redux";
 import {
   LineChart,
@@ -10,7 +9,9 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import moment from "moment";
 import styles from "./Cases.module.scss";
+import Panel from "../Panel";
 
 function Cases(props) {
   const countryA = Array.from(props.countryACases);
@@ -43,21 +44,24 @@ function Cases(props) {
 
   return (
     <div className={styles.Container}>
-      <h2>Total Number of Coronavirus Cases</h2>
-      <h4>
-        {props.countries[0]} vs. {props.countries[1]}
-      </h4>
-      <LineChart width={500} height={500} data={data}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="Date" />
-        <YAxis />
-        <Tooltip
-          formatter={(value) => new Intl.NumberFormat("en").format(value)}
-        />
-        <Legend />
-        <Line type="monotone" dataKey={props.countries[0]} stroke="#8884d8" />
-        <Line type="monotone" dataKey={props.countries[1]} stroke="#82ca9d" />
-      </LineChart>
+      <Panel />
+      <div className={styles.CasesContainer}>
+        <h2>Total Number of Coronavirus Cases</h2>
+        <h4>
+          {props.countries[0]} vs. {props.countries[1]}
+        </h4>
+        <LineChart width={550} height={550} data={data}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="Date" />
+          <YAxis />
+          <Tooltip
+            formatter={(value) => new Intl.NumberFormat("en").format(value)}
+          />
+          <Legend />
+          <Line type="monotone" dataKey={props.countries[0]} stroke="#8884d8" />
+          <Line type="monotone" dataKey={props.countries[1]} stroke="#82ca9d" />
+        </LineChart>
+      </div>
     </div>
   );
 }

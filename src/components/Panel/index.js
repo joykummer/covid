@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, connect } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import countryList from "react-select-country-list";
-import styles from "./Form.module.scss";
+import styles from "./Panel.module.scss";
 import { countryACasesFunction } from "../../store/actions/countryACasesAction";
 import { countryBCasesFunction } from "../../store/actions/countryBCasesAction";
 import { datesFunction } from "../../store/actions/datesAction";
 import { countriesFunction } from "../../store/actions/countriesAction";
 
-export function Form() {
-  const [countryA, setCountryA] = useState("");
-  const [countryB, setCountryB] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+function Panel(props) {
+  const [countryA, setCountryA] = useState(props.countries[0]);
+  const [countryB, setCountryB] = useState(props.countries[1]);
+  const [startDate, setStartDate] = useState(props.dates[0]);
+  const [endDate, setEndDate] = useState(props.dates[1]);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -98,9 +98,20 @@ export function Form() {
           </div>
         </div>
         <button type="submit" className={styles.Submit}>
-          SUBMIT
+          UPDATE
         </button>
       </form>
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    countryACases: state.countryACases,
+    countryBCases: state.countryBCases,
+    countries: state.countries,
+    dates: state.dates,
+  };
+};
+
+export default connect(mapStateToProps)(Panel);
