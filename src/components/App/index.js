@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Cases from "../Cases";
 import { Form } from "../Form";
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Form} />
+        <Route exact path="/helloworld" component={Cases} />
       </Switch>
     </BrowserRouter>
   );

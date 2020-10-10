@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import countryList from "react-select-country-list";
 import styles from "./Form.module.scss";
+import { countryACasesFunction } from "../../store/actions/countryACasesAction";
+import { countryBCasesFunction } from "../../store/actions/countryBCasesAction";
 
 export function Form() {
   const [countryA, setCountryA] = useState("default");
@@ -10,10 +14,15 @@ export function Form() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
+  const dispatch = useDispatch();
+  const history = useHistory();
   const countries = countryList().getData();
 
-  const onSubmitHandler = () => {
-    console.log("hello wolrld");
+  const onSubmitHandler = async (event) => {
+    event.preventDefault();
+    await dispatch(countryACasesFunction(countryA, startDate, endDate));
+    await dispatch(countryBCasesFunction(countryB, startDate, endDate));
+    history.push("/helloworld");
   };
 
   return (
@@ -84,4 +93,4 @@ export function Form() {
       <input type="submit" className={styles.Submit} />
     </form>
   );
-};
+}

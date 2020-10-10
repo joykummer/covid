@@ -1,1 +1,2 @@
-export const SET_CASES = 'SETCASES';
+export const SET_COUNTRY_A = "SETCOUNTRYA";
+export const SET_COUNTRY_B = "SETCOUNTRYB";
