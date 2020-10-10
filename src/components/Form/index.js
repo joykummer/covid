@@ -7,6 +7,8 @@ import countryList from "react-select-country-list";
 import styles from "./Form.module.scss";
 import { countryACasesFunction } from "../../store/actions/countryACasesAction";
 import { countryBCasesFunction } from "../../store/actions/countryBCasesAction";
+import { datesFunction } from "../../store/actions/datesAction";
+import { countriesFunction } from "../../store/actions/countriesAction";
 
 export function Form() {
   const [countryA, setCountryA] = useState("default");
@@ -22,6 +24,8 @@ export function Form() {
     event.preventDefault();
     await dispatch(countryACasesFunction(countryA, startDate, endDate));
     await dispatch(countryBCasesFunction(countryB, startDate, endDate));
+    await dispatch(datesFunction(startDate, endDate));
+    await dispatch(countriesFunction(countryA, countryB));
     history.push("/helloworld");
   };
 
