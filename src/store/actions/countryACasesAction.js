@@ -2,6 +2,7 @@ import { SET_COUNTRY_A } from "../types";
 import Axios from "../../axios";
 
 export const countryACasesAction = (cases) => {
+  console.log("cases", cases);
   return {
     type: SET_COUNTRY_A,
     payload: cases,
