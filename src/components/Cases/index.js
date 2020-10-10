@@ -1,7 +1,15 @@
 import React from "react";
 import moment from "moment";
 import { connect } from "react-redux";
-import { LineChart, Line } from "recharts";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from "recharts";
 
 function Cases(props) {
   const countryA = Array.from(props.countryACases);
@@ -26,7 +34,7 @@ function Cases(props) {
     const casesA = countryA[i] ? countryA[i].Cases : 0;
     const casesB = countryB[i] ? countryB[i].Cases : 0;
     data.push({
-      Date: dates[i],
+      Date: dates[i].Date,
       [props.countries[0]]: casesA,
       [props.countries[1]]: casesB,
     });
@@ -35,8 +43,15 @@ function Cases(props) {
   return (
     <>
       <LineChart width={500} height={500} data={data}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="Date" />
+        <YAxis />
+        <Tooltip
+          formatter={(value) => new Intl.NumberFormat("en").format(value)}
+        />
+        <Legend />
         <Line type="monotone" dataKey={props.countries[0]} stroke="#8884d8" />
-        <Line type="monotone" dataKey={props.countries[1]} stroke="#000000" />
+        <Line type="monotone" dataKey={props.countries[1]} stroke="#82ca9d" />
       </LineChart>
     </>
   );
