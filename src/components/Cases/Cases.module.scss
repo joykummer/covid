@@ -1,0 +1,17 @@
+.Container {
+  height: 100vh;
+  width: 100vw;
+  font-family: Cabin, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h2 {
+    margin: 0px;
+  }
+
+  h4 {
+    color: #ff9700;
+  }
+}

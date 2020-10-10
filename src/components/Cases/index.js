@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import styles from "./Cases.module.scss";
 
 function Cases(props) {
   const countryA = Array.from(props.countryACases);
@@ -41,7 +42,11 @@ function Cases(props) {
   }
 
   return (
-    <>
+    <div className={styles.Container}>
+      <h2>Total Number of Coronavirus Cases</h2>
+      <h4>
+        {props.countries[0]} vs. {props.countries[1]}
+      </h4>
       <LineChart width={500} height={500} data={data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="Date" />
@@ -53,7 +58,7 @@ function Cases(props) {
         <Line type="monotone" dataKey={props.countries[0]} stroke="#8884d8" />
         <Line type="monotone" dataKey={props.countries[1]} stroke="#82ca9d" />
       </LineChart>
-    </>
+    </div>
   );
 }
 
