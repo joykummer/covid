@@ -10,8 +10,8 @@ import {
   Legend,
 } from "recharts";
 import moment from "moment";
-import styles from "./Cases.module.scss";
 import Panel from "../Panel";
+import styles from "./Cases.module.scss";
 
 function Cases(props) {
   const countryA = Array.from(props.countryACases);

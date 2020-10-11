@@ -2,7 +2,6 @@ import { SET_COUNTRY_A } from "../types";
 import Axios from "../../axios";
 
 export const countryACasesAction = (cases) => {
-  console.log("cases", cases);
   return {
     type: SET_COUNTRY_A,
     payload: cases,
@@ -19,6 +18,15 @@ export const countryACasesFunction = (countryA, startDate, endDate) => async (
     );
     dispatch(countryACasesAction(response.data));
   } catch (error) {
-    console.log("error", error);
+    if (error.response) {
+      // client received an error response (5xx, 4xx)
+      return error.response;
+    } else if (error.request) {
+      // client never received a response, or request never left
+      return error.request;
+    } else {
+      // anything else
+      return error;
+    }
   }
 };

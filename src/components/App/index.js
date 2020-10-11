@@ -1,7 +1,8 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Cases from "../Cases";
 import { Form } from "../Form";
+import { PageNotFound } from "../PageNotFound";
 
 function App() {
   return (
@@ -9,6 +10,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={Form} />
         <Route exact path="/results" component={Cases} />
+        <Route exact path="/pagenotfound" component={PageNotFound} />
+        <Redirect to={'pagenotfound'} />
       </Switch>
     </BrowserRouter>
   );
