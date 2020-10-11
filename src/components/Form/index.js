@@ -29,6 +29,8 @@ export function Form() {
     history.push("/results");
   };
 
+  const condition = countryA && countryB && startDate && endDate;
+
   return (
     <div className={styles.Container}>
       <form onSubmit={onSubmitHandler} className={styles.Form}>
@@ -97,7 +99,10 @@ export function Form() {
             />
           </div>
         </div>
-        <button type="submit" className={styles.Submit}>
+        <button
+          type="submit"
+          className={condition ? styles.active : styles.Submit}
+        >
           SUBMIT
         </button>
       </form>

@@ -29,6 +29,12 @@ function Panel(props) {
     history.push("/results");
   };
 
+  const condition =
+    (countryA != props.countries[0] && startDate && endDate) ||
+    (countryB != props.countries[1] && startDate && endDate) ||
+    (startDate != props.dates[0] && startDate && endDate) ||
+    (endDate != props.dates[1] && startDate && endDate);
+
   return (
     <div className={styles.Container}>
       <form onSubmit={onSubmitHandler} className={styles.Form}>
@@ -97,7 +103,10 @@ function Panel(props) {
             />
           </div>
         </div>
-        <button type="submit" className={styles.Submit}>
+        <button
+          type="submit"
+          className={condition ? styles.active : styles.Submit}
+        >
           UPDATE
         </button>
       </form>
