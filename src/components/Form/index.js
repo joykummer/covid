@@ -91,7 +91,7 @@ export function Form() {
               selected={endDate}
               onChange={(date) => setEndDate(date)}
               dateFormat="MM/dd/yyyy"
-              // minDate={countryA}
+              minDate={startDate}
               maxDate={new Date()}
               className={styles.Date}
             />
