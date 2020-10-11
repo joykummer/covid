@@ -10,6 +10,7 @@
     height: 275px;
     width: 275px;
     border: 1px solid #ff9700;
+    box-shadow: 5px 5px 10px lightgray;
     padding: 20px;
     border-radius: 5px;
     display: flex;
@@ -91,7 +92,7 @@
 
       &:hover {
         cursor: pointer;
-        background-color: #dddddd;
+        background-color: #ddd;
       }
 
       &:focus {

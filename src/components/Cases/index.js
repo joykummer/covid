@@ -50,7 +50,7 @@ function Cases(props) {
         <h4>
           {props.countries[0]} vs. {props.countries[1]}
         </h4>
-        <LineChart width={550} height={550} data={data}>
+        <LineChart width={750} height={600} data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="Date" />
           <YAxis />

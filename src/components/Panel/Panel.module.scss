@@ -1,26 +1,31 @@
 .Container {
-  height: 75px;
-  width: 100vw;
+  height: 100vh;
+  width: 30vw;
   font-family: Cabin, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
 
   .Form {
-    height: 100%;
-    width: 100%;
+    height: 275px;
+    width: 275px;
+    border: 1px solid #ff9700;
+    box-shadow: 5px 5px 10px lightgray;
+    padding: 20px;
+    border-radius: 5px;
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 
     .Countries {
       display: flex;
+      flex-direction: column;
       justify-content: space-evenly;
 
       .CountryContainer {
         height: 100%;
-        width: 250px;
         display: flex;
+        padding-bottom: 15px;
         flex-direction: column;
 
         .Label {
@@ -32,7 +37,7 @@
 
         .Country {
           height: 35px;
-          width: 200px;
+          width: 100%;
           background-image: url("./arrow.png");
           background-position: calc(100% - 10px);
           background-repeat: no-repeat;
@@ -52,14 +57,14 @@
     }
 
     .Dates {
+      width: 100%;
       display: flex;
       justify-content: space-between;
 
       .DateContainer {
-        height: 100%;
-        width: 225px;
         display: flex;
         flex-direction: column;
+        padding-bottom: 25px;
 
         .Label {
           color: #444;
@@ -70,7 +75,7 @@
 
         .Date {
           height: 35px;
-          width: 150px;
+          width: 100px;
           border: 1px solid #555;
           border-radius: 5px;
           padding: 0px 10px;
@@ -80,14 +85,14 @@
 
     .Submit {
       height: 40px;
-      width: 150px;
+      width: 100%;
       border: 1px solid #555;
       border-radius: 5px;
       letter-spacing: 1px;
 
       &:hover {
         cursor: pointer;
-        background-color: #dddddd;
+        background-color: #ddd;
       }
 
       &:focus {
