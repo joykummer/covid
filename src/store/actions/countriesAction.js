@@ -1,7 +1,6 @@
 import { SET_COUNTRIES } from "../types";
 
 export const countriesAction = (countries) => {
-  console.log("countries", countries);
   return {
     type: SET_COUNTRIES,
     payload: countries,

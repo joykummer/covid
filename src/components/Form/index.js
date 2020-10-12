@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
@@ -65,9 +65,15 @@ export function Form() {
                 -- Select --
               </option>
               {countries
-                ? countries.map((country) => (
-                    <option key={country.value}>{country.label}</option>
-                  ))
+                ? countries.map((country) =>
+                    countryA === country.label ? (
+                      <option key={country.value} disabled>
+                        {country.label}
+                      </option>
+                    ) : (
+                      <option key={country.value}>{country.label}</option>
+                    )
+                  )
                 : null}
             </select>
           </div>

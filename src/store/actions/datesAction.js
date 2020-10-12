@@ -1,7 +1,6 @@
 import { SET_DATES } from "../types";
 
 export const datesAction = (dates) => {
-  console.log("dates", dates);
   return {
     type: SET_DATES,
     payload: dates,

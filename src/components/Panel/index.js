@@ -11,8 +11,12 @@ import { datesFunction } from "../../store/actions/datesAction";
 import { countriesFunction } from "../../store/actions/countriesAction";
 
 function Panel(props) {
-  const [countryA, setCountryA] = useState(props.countries[0]);
-  const [countryB, setCountryB] = useState(props.countries[1]);
+  const [countryA, setCountryA] = useState(
+    props.countries[0] ? props.countries[0] : ""
+  );
+  const [countryB, setCountryB] = useState(
+    props.countries[1] ? props.countries[1] : ""
+  );
   const [startDate, setStartDate] = useState(props.dates[0]);
   const [endDate, setEndDate] = useState(props.dates[1]);
 
@@ -30,10 +34,10 @@ function Panel(props) {
   };
 
   const condition =
-    (countryA != props.countries[0] && startDate && endDate) ||
-    (countryB != props.countries[1] && startDate && endDate) ||
-    (startDate != props.dates[0] && startDate && endDate) ||
-    (endDate != props.dates[1] && startDate && endDate);
+    (countryA !== props.countries[0] && startDate && endDate) ||
+    (countryB !== props.countries[1] && startDate && endDate) ||
+    (startDate !== props.dates[0] && startDate && endDate) ||
+    (endDate !== props.dates[1] && startDate && endDate);
 
   return (
     <div className={styles.Container}>
@@ -69,9 +73,15 @@ function Panel(props) {
                 -- Select --
               </option>
               {countries
-                ? countries.map((country) => (
-                    <option key={country.value}>{country.label}</option>
-                  ))
+                ? countries.map((country) =>
+                    countryA === country.label ? (
+                      <option key={country.value} disabled>
+                        {country.label}
+                      </option>
+                    ) : (
+                      <option key={country.value}>{country.label}</option>
+                    )
+                  )
                 : null}
             </select>
           </div>
