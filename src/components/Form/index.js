@@ -47,9 +47,15 @@ export function Form() {
                 -- Select --
               </option>
               {countries
-                ? countries.map((country) => (
-                    <option key={country.value}>{country.label}</option>
-                  ))
+                ? countries.map((country) =>
+                    countryB === country.label ? (
+                      <option key={country.value} disabled>
+                        {country.label}
+                      </option>
+                    ) : (
+                      <option key={country.value}>{country.label}</option>
+                    )
+                  )
                 : null}
             </select>
           </div>
