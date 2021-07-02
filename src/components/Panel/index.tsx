@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import countryList from "react-select-country-list";
 import styles from "./Panel.module.scss";
 import { countryACasesFunction } from "../../store/actions/countryACasesAction";
 import { countryBCasesFunction } from "../../store/actions/countryBCasesAction";
-import { datesFunction } from "../../store/actions/datesAction";
+import { chosenDatesFunction } from "../../store/actions/chosenDatesAction";
 import { chosenCountriesFunction } from "../../store/actions/chosenCountriesAction";
 import { Countries } from "./types";
+import { RootState } from "../../store";
 
 export const Panel = () => {
+  const { chosenCountries, chosenDates } = useSelector((state: RootState) => ({
+    chosenCountries: state.countries,
+    chosenDates: state.dates,
+  }));
+
   const [countryA, setCountryA] = useState("");
   const [countryB, setCountryB] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -25,12 +31,25 @@ export const Panel = () => {
     event.preventDefault();
     await dispatch(countryACasesFunction(countryA, startDate, endDate));
     await dispatch(countryBCasesFunction(countryB, startDate, endDate));
-    await dispatch(datesFunction(startDate, endDate));
+    await dispatch(chosenDatesFunction(startDate, endDate));
     await dispatch(chosenCountriesFunction(countryA, countryB));
     history.push("/");
   };
 
-  const condition = countryA && countryB && startDate && endDate;
+  const combinedCountries = [countryA, countryB];
+  const combinedDates = [startDate, endDate];
+
+  const countriesAreEqual =
+    chosenCountries.toString() === combinedCountries.toString();
+
+  const datesAreEqual = chosenDates.toString() === combinedDates.toString();
+
+  const condition =
+    (countryA && countryB && startDate && endDate && !countriesAreEqual) ||
+    !datesAreEqual;
+
+  const updateCondition =
+    chosenCountries.length && chosenDates.length ? true : false;
 
   return (
     <div className={styles.Container}>
@@ -116,7 +135,7 @@ export const Panel = () => {
           type="submit"
           className={condition ? styles.active : styles.Submit}
         >
-          UPDATE
+          {updateCondition ? "UPDATE" : "SEARCH"}
         </button>
       </form>
     </div>
