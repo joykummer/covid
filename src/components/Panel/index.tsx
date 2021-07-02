@@ -27,14 +27,8 @@ export const Panel = () => {
     await dispatch(countryBCasesFunction(countryB, startDate, endDate));
     await dispatch(datesFunction(startDate, endDate));
     await dispatch(chosenCountriesFunction(countryA, countryB));
-    history.push("/results");
+    history.push("/");
   };
-
-  // const condition =
-  //   (countryA !== countriesList[0] && startDate && endDate) ||
-  //   (countryB !== countriesList[1] && startDate && endDate) ||
-  //   (startDate !== dates[0] && startDate && endDate) ||
-  //   (endDate !== dates[1] && startDate && endDate);
 
   const condition = countryA && countryB && startDate && endDate;
 
@@ -92,7 +86,7 @@ export const Panel = () => {
           </div>
         </div>
         <div className={styles.Dates}>
-          <div className={styles.DateContainer}>
+          <div className={styles.DatesContainer}>
             <label className={styles.Label}>START DATE</label>
             <DatePicker
               required
@@ -104,7 +98,7 @@ export const Panel = () => {
               maxDate={new Date()}
             />
           </div>
-          <div className={styles.DateContainer}>
+          <div className={styles.DatesContainer}>
             <label className={styles.Label}>END DATE</label>
             <DatePicker
               required

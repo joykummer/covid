@@ -54,27 +54,29 @@ export const Cases = () => {
   }
 
   return (
-    <div className={styles.Container}>
+    <>
       <Panel />
-      {countries[0] && countries[1] && (
-        <div className={styles.CasesContainer}>
-          <h2>Total Number of Coronavirus Cases</h2>
-          <h4>
-            {countries[0]} vs. {countries[1]}
-          </h4>
-          <LineChart width={750} height={600} data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="Date" />
-            <YAxis />
-            <Tooltip
-              formatter={(value) => new Intl.NumberFormat("en").format(value)}
-            />
-            <Legend />
-            <Line type="monotone" dataKey={countries[0]} stroke="#8884d8" />
-            <Line type="monotone" dataKey={countries[1]} stroke="#82ca9d" />
-          </LineChart>
-        </div>
-      )}
-    </div>
+      <div className={styles.Container}>
+        {countries[0] && countries[1] && (
+          <div className={styles.CasesContainer}>
+            <h2>Total Number of Coronavirus Cases</h2>
+            <h4>
+              {countries[0]} vs. {countries[1]}
+            </h4>
+            <LineChart width={750} height={600} data={data}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="Date" />
+              <YAxis />
+              <Tooltip
+                formatter={(value) => new Intl.NumberFormat("en").format(value)}
+              />
+              <Legend />
+              <Line type="monotone" dataKey={countries[0]} stroke="#8884d8" />
+              <Line type="monotone" dataKey={countries[1]} stroke="#82ca9d" />
+            </LineChart>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
