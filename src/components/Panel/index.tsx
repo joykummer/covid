@@ -40,91 +40,91 @@ export const Panel = () => {
 
   return (
     <div className={styles.Container}>
-    <form onSubmit={onSubmitHandler} className={styles.Form}>
-      <div className={styles.Countries}>
-        <div className={styles.CountryContainer}>
-          <label className={styles.Label}>COUNTRY 1</label>
-          <select
-            required
-            value={countryA}
-            onChange={(e) => setCountryA(e.target.value)}
-            className={styles.Country}
-          >
-            <option value="" disabled>
-              -- Select --
-            </option>
-            {countries
-              ? countries.map((country) =>
-                  countryB === country.label ? (
-                    <option key={country.value} disabled>
-                      {country.label}
-                    </option>
-                  ) : (
-                    <option key={country.value}>{country.label}</option>
+      <form onSubmit={onSubmitHandler} className={styles.Form}>
+        <div className={styles.Countries}>
+          <div className={styles.CountryContainer}>
+            <label className={styles.Label}>COUNTRY 1</label>
+            <select
+              required
+              value={countryA}
+              onChange={(e) => setCountryA(e.target.value)}
+              className={styles.Country}
+            >
+              <option value="" disabled>
+                -- Select --
+              </option>
+              {countries
+                ? countries.map((country) =>
+                    countryB === country.label ? (
+                      <option key={country.value} disabled>
+                        {country.label}
+                      </option>
+                    ) : (
+                      <option key={country.value}>{country.label}</option>
+                    )
                   )
-                )
-              : null}
-          </select>
-        </div>
-        <div className={styles.CountryContainer}>
-          <label className={styles.Label}>COUNTRY 2</label>
-          <select
-            required
-            value={countryB}
-            onChange={(e) => setCountryB(e.target.value)}
-            className={styles.Country}
-          >
-            <option value="" disabled>
-              -- Select --
-            </option>
-            {countries
-              ? countries.map((country) =>
-                  countryA === country.label ? (
-                    <option key={country.value} disabled>
-                      {country.label}
-                    </option>
-                  ) : (
-                    <option key={country.value}>{country.label}</option>
+                : null}
+            </select>
+          </div>
+          <div className={styles.CountryContainer}>
+            <label className={styles.Label}>COUNTRY 2</label>
+            <select
+              required
+              value={countryB}
+              onChange={(e) => setCountryB(e.target.value)}
+              className={styles.Country}
+            >
+              <option value="" disabled>
+                -- Select --
+              </option>
+              {countries
+                ? countries.map((country) =>
+                    countryA === country.label ? (
+                      <option key={country.value} disabled>
+                        {country.label}
+                      </option>
+                    ) : (
+                      <option key={country.value}>{country.label}</option>
+                    )
                   )
-                )
-              : null}
-          </select>
+                : null}
+            </select>
+          </div>
         </div>
-      </div>
-      <div className={styles.Dates}>
-        <div className={styles.DateContainer}>
-          <label className={styles.Label}>START DATE</label>
-          <DatePicker
-            required
-            placeholderText="-- Select --"
-            selected={startDate}
-            onChange={(date) => setStartDate(date)}
-            dateFormat="MM/dd/yyyy"
-            className={styles.Date}
-            maxDate={new Date()}
-          />
+        <div className={styles.Dates}>
+          <div className={styles.DateContainer}>
+            <label className={styles.Label}>START DATE</label>
+            <DatePicker
+              required
+              placeholderText="-- Select --"
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+              dateFormat="MM/dd/yyyy"
+              className={styles.Date}
+              maxDate={new Date()}
+            />
+          </div>
+          <div className={styles.DateContainer}>
+            <label className={styles.Label}>END DATE</label>
+            <DatePicker
+              required
+              placeholderText="-- Select --"
+              selected={endDate}
+              onChange={(date) => setEndDate(date)}
+              dateFormat="MM/dd/yyyy"
+              minDate={startDate}
+              maxDate={new Date()}
+              className={styles.Date}
+            />
+          </div>
         </div>
-        <div className={styles.DateContainer}>
-          <label className={styles.Label}>END DATE</label>
-          <DatePicker
-            required
-            placeholderText="-- Select --"
-            selected={endDate}
-            onChange={(date) => setEndDate(date)}
-            dateFormat="MM/dd/yyyy"
-            minDate={startDate}
-            maxDate={new Date()}
-            className={styles.Date}
-          />
-        </div>
-      </div>
-      <button
-        type="submit"
-        className={condition ? styles.active : styles.Submit}
-      >
-        SUBMIT
-      </button>
-    </form>
-  </div>
+        <button
+          type="submit"
+          className={condition ? styles.active : styles.Submit}
+        >
+          SUBMIT
+        </button>
+      </form>
+    </div>
   );
 };
