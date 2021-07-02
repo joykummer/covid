@@ -45,8 +45,11 @@ export const Panel = () => {
   const datesAreEqual = chosenDates.toString() === combinedDates.toString();
 
   const condition =
-    (countryA && countryB && startDate && endDate && !countriesAreEqual) ||
-    !datesAreEqual;
+    countryA &&
+    countryB &&
+    startDate &&
+    endDate &&
+    (!countriesAreEqual || !datesAreEqual);
 
   const updateCondition =
     chosenCountries.length && chosenDates.length ? true : false;

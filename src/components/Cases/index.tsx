@@ -15,18 +15,18 @@ import { RootState } from "../../store";
 import { CountryDetails } from "./types";
 
 export const Cases = () => {
-  const { countryACases, countryBCases, chosenDates } = useSelector(
-    (state: RootState) => ({
+  const { countryACases, countryBCases, chosenCountries, chosenDates } =
+    useSelector((state: RootState) => ({
       countryACases: state.countryACases,
       countryBCases: state.countryBCases,
+      chosenCountries: state.countries,
       chosenDates: state.dates,
-    })
-  );
+    }));
 
   const countryADetails: CountryDetails[] = Array.from(countryACases);
   const countryBDetails: CountryDetails[] = Array.from(countryBCases);
-  const countryA = countryADetails[0]?.Country;
-  const countryB = countryBDetails[0]?.Country;
+  const countryA = chosenCountries[0];
+  const countryB = chosenCountries[1];
 
   // list of date range
   const startDate = moment(chosenDates[0]);
