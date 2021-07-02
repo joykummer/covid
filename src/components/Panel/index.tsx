@@ -122,7 +122,7 @@ export const Panel = () => {
           type="submit"
           className={condition ? styles.active : styles.Submit}
         >
-          SUBMIT
+          UPDATE
         </button>
       </form>
     </div>
