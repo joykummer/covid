@@ -7,11 +7,12 @@ export const chosenCountriesAction = (chosenCountries) => {
   };
 };
 
-export const chosenCountriesFunction = (countryA, countryB) => async (dispatch) => {
-  try {
-    const chosenCountries = [countryA, countryB];
-    dispatch(chosenCountriesAction(chosenCountries));
-  } catch (error) {
-    console.log("error", error);
-  }
-};
+export const chosenCountriesFunction =
+  (countryA, countryB) => async (dispatch) => {
+    try {
+      const chosenCountries = [countryA, countryB];
+      dispatch(chosenCountriesAction(chosenCountries));
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
