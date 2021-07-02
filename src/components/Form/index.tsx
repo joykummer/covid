@@ -1,24 +1,20 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch, connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import countryList from "react-select-country-list";
-import styles from "./Panel.module.scss";
+import styles from "./Form.module.scss";
 import { countryACasesFunction } from "../../store/actions/countryACasesAction";
 import { countryBCasesFunction } from "../../store/actions/countryBCasesAction";
 import { datesFunction } from "../../store/actions/datesAction";
-import { countriesFunction } from "../../store/actions/countriesAction";
+import { chosenCountriesFunction } from "../../store/actions/chosenCountriesAction";
 
-function Panel(props) {
-  const [countryA, setCountryA] = useState(
-    props.countries[0] ? props.countries[0] : ""
-  );
-  const [countryB, setCountryB] = useState(
-    props.countries[1] ? props.countries[1] : ""
-  );
-  const [startDate, setStartDate] = useState(props.dates[0]);
-  const [endDate, setEndDate] = useState(props.dates[1]);
+export const Form = () => {
+  const [countryA, setCountryA] = useState("");
+  const [countryB, setCountryB] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -29,15 +25,11 @@ function Panel(props) {
     await dispatch(countryACasesFunction(countryA, startDate, endDate));
     await dispatch(countryBCasesFunction(countryB, startDate, endDate));
     await dispatch(datesFunction(startDate, endDate));
-    await dispatch(countriesFunction(countryA, countryB));
+    await dispatch(chosenCountriesFunction(countryA, countryB));
     history.push("/results");
   };
 
-  const condition =
-    (countryA !== props.countries[0] && startDate && endDate) ||
-    (countryB !== props.countries[1] && startDate && endDate) ||
-    (startDate !== props.dates[0] && startDate && endDate) ||
-    (endDate !== props.dates[1] && startDate && endDate);
+  const condition = countryA && countryB && startDate && endDate;
 
   return (
     <div className={styles.Container}>
@@ -123,20 +115,9 @@ function Panel(props) {
           type="submit"
           className={condition ? styles.active : styles.Submit}
         >
-          UPDATE
+          SUBMIT
         </button>
       </form>
     </div>
   );
-}
-
-const mapStateToProps = (state) => {
-  return {
-    countryACases: state.countryACases,
-    countryBCases: state.countryBCases,
-    countries: state.countries,
-    dates: state.dates,
-  };
 };
-
-export default connect(mapStateToProps)(Panel);
