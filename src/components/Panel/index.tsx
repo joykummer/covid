@@ -1,44 +1,58 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch, connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import countryList from "react-select-country-list";
 import styles from "./Panel.module.scss";
 import { countryACasesFunction } from "../../store/actions/countryACasesAction";
 import { countryBCasesFunction } from "../../store/actions/countryBCasesAction";
-import { datesFunction } from "../../store/actions/datesAction";
-import { countriesFunction } from "../../store/actions/countriesAction";
-import Button from "../Button";
+import { chosenDatesFunction } from "../../store/actions/chosenDatesAction";
+import { chosenCountriesFunction } from "../../store/actions/chosenCountriesAction";
+import { Countries } from "./types";
+import { RootState } from "../../store";
 
-function Panel(props) {
-  const [countryA, setCountryA] = useState(
-    props.countries[0] ? props.countries[0] : ""
-  );
-  const [countryB, setCountryB] = useState(
-    props.countries[1] ? props.countries[1] : ""
-  );
-  const [startDate, setStartDate] = useState(props.dates[0]);
-  const [endDate, setEndDate] = useState(props.dates[1]);
+export const Panel = () => {
+  const { chosenCountries, chosenDates } = useSelector((state: RootState) => ({
+    chosenCountries: state.countries,
+    chosenDates: state.dates,
+  }));
+
+  const [countryA, setCountryA] = useState("");
+  const [countryB, setCountryB] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const countries = countryList().getData();
+  const countries: Countries[] = countryList().getData();
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     await dispatch(countryACasesFunction(countryA, startDate, endDate));
     await dispatch(countryBCasesFunction(countryB, startDate, endDate));
-    await dispatch(datesFunction(startDate, endDate));
-    await dispatch(countriesFunction(countryA, countryB));
-    history.push("/results");
+    await dispatch(chosenDatesFunction(startDate, endDate));
+    await dispatch(chosenCountriesFunction(countryA, countryB));
+    history.push("/");
   };
 
+  const combinedCountries = [countryA, countryB];
+  const combinedDates = [startDate, endDate];
+
+  const countriesAreEqual =
+    chosenCountries.toString() === combinedCountries.toString();
+
+  const datesAreEqual = chosenDates.toString() === combinedDates.toString();
+
   const condition =
-    (countryA !== props.countries[0] && startDate && endDate) ||
-    (countryB !== props.countries[1] && startDate && endDate) ||
-    (startDate !== props.dates[0] && startDate && endDate) ||
-    (endDate !== props.dates[1] && startDate && endDate);
+    countryA &&
+    countryB &&
+    startDate &&
+    endDate &&
+    (!countriesAreEqual || !datesAreEqual);
+
+  const updateCondition =
+    chosenCountries.length && chosenDates.length ? true : false;
 
   return (
     <div className={styles.Container}>
@@ -94,7 +108,7 @@ function Panel(props) {
           </div>
         </div>
         <div className={styles.Dates}>
-          <div className={styles.DateContainer}>
+          <div className={styles.DatesContainer}>
             <label className={styles.Label}>START DATE</label>
             <DatePicker
               required
@@ -106,7 +120,7 @@ function Panel(props) {
               maxDate={new Date()}
             />
           </div>
-          <div className={styles.DateContainer}>
+          <div className={styles.DatesContainer}>
             <label className={styles.Label}>END DATE</label>
             <DatePicker
               required
@@ -120,24 +134,13 @@ function Panel(props) {
             />
           </div>
         </div>
-        <Button
+        <button
           type="submit"
           className={condition ? styles.active : styles.Submit}
         >
-          UPDATE
-        </Button>
+          {updateCondition ? "UPDATE" : "SEARCH"}
+        </button>
       </form>
     </div>
   );
-}
-
-const mapStateToProps = (state) => {
-  return {
-    countryACases: state.countryACases,
-    countryBCases: state.countryBCases,
-    countries: state.countries,
-    dates: state.dates,
-  };
 };
-
-export default connect(mapStateToProps)(Panel);
