@@ -9,6 +9,7 @@ import { countryACasesFunction } from "../../store/actions/countryACasesAction";
 import { countryBCasesFunction } from "../../store/actions/countryBCasesAction";
 import { datesFunction } from "../../store/actions/datesAction";
 import { countriesFunction } from "../../store/actions/countriesAction";
+import Button from "../Button";
 
 function Panel(props) {
   const [countryA, setCountryA] = useState(
@@ -119,12 +120,12 @@ function Panel(props) {
             />
           </div>
         </div>
-        <button
+        <Button
           type="submit"
           className={condition ? styles.active : styles.Submit}
         >
           UPDATE
-        </button>
+        </Button>
       </form>
     </div>
   );
