@@ -4,7 +4,7 @@ import { PageNotFound } from "../PageNotFound";
 
 export const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Switch>
         <Route exact path="/" component={Cases} />
         <Route exact path="/results" component={Cases} />
